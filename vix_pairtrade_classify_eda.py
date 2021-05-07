@@ -13,12 +13,11 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import statsmodels.api as sm
 from statsmodels.tsa.stattools import adfuller
-# %matplotlib inline
 
 df=pd.read_csv('/content/drive/MyDrive/Copy of data.csv', parse_dates=True)
 df['date']=pd.to_datetime(df['date'])
 
-"""## Ranking the stocks using Volatility index of that stock by week"""
+# Ranking the stocks using Volatility index of that stock by week
 
 # Function to get the weekly vix of a given stock
 
@@ -59,9 +58,8 @@ sub_1_df=pd.DataFrame(sub_1)
 sub_1_df=sub_1_df.transpose()
 sub_1_df.columns=year_week_list[0]
 
-sub_1_df
 
-"""## Finding the top 10 pair-trading stocks by year using ADF test"""
+# Finding the top 10 pair-trading stocks by year using ADF test
 
 grouped_df = df.groupby(['date', 'Name']).sum()
 
@@ -148,7 +146,7 @@ sub_2=pd.concat([t_values_2014.head(10), t_values_2015.head(10), t_values_2016.h
 
 sub_2
 
-"""## Predicting red(0), green(1), No confidence(0.5) for the next day of the stock"""
+# Predicting red(0), green(1), No confidence(0.5) for the next day of the stock
 
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
@@ -194,9 +192,7 @@ for prob in proba[:,0]:
     
 sub_3=np.array(pred)
 
-sub_3
-
-"""## EDA on any particular stock"""
+# EDA on any particular stock
 
 import seaborn as sns
 import plotly.graph_objects as go
@@ -221,7 +217,7 @@ fig = go.Figure(data=[go.Candlestick(x=apple.index,
 
 fig.show()
 
-"""As we can see that there is up and down trend from the candlestick graph for a while and the price keeps ranging between the same two values"""
+# As we can see that there is up and down trend from the candlestick graph for a while and the price keeps ranging between the same two values
 
 apple['return']=apple['close'].pct_change()
 plt.figure(figsize=(10, 5))
